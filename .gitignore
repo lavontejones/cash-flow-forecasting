@@ -12,5 +12,5 @@ htmlcov/
 .env
 .env.*
 !.env.example
-/output/
-/local-data/
+output/
+local-data/
