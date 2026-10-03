@@ -1,0 +1,6 @@
+{
+  "name": "smb-cash-flow-forecast-browser-checks",
+  "private": true,
+  "scripts": {"test:browser": "node scripts/browser-smoke.cjs"},
+  "devDependencies": {"playwright": "1.51.1"}
+}

@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "smb-cash-flow-forecast"
+version = "1.0.0"
+description = "Transparent monthly SMB cash-flow forecasting and scenario analysis"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+dependencies = []
+
+[project.scripts]
+smb-forecast = "smb_forecast.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["smb_forecast*"]
+
+[tool.setuptools.package-data]
+smb_forecast = ["sample.json", "web/*.html", "web/*.css", "web/*.js"]

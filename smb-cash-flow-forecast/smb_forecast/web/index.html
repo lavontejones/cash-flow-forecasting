@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cash Flow Studio</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+<header>
+  <div><p class="eyebrow">SMB PLANNING WORKSPACE</p><h1>Cash Flow Studio</h1><p class="subtitle">Understand when profit turns into cash.</p></div>
+  <div class="header-actions"><label class="file-button">Load assumptions<input id="upload" type="file" accept=".json,application/json"></label><button id="save-input" class="secondary">Save assumptions</button><button id="reset" class="secondary">Reset sample</button></div>
+</header>
+<div class="workspace">
+  <aside aria-label="Forecast assumptions">
+    <div class="editor-header"><h2>Assumptions</h2><span class="tag">Synthetic sample</span></div>
+    <label>Edit scenario<select id="scenario"></select></label>
+    <p class="hint">Base is the baseline. Other scenarios replace selected assumptions; their variances compare against base.</p>
+    <form id="assumptions" novalidate>
+      <details open><summary>Revenue &amp; margin</summary><div id="revenue-fields"></div></details>
+      <details open><summary>Operating costs &amp; cash</summary><div id="cost-fields"></div></details>
+      <details><summary>Timing &amp; seasonality</summary><div id="timing-fields"></div></details>
+      <details><summary>Hires, capital &amp; financing</summary><div id="schedule-fields"></div></details>
+      <button type="submit" class="primary">Recalculate forecast</button>
+    </form>
+    <p class="hint">Hires and other cash operating costs are paid in their expense month. Supplier timing applies to COGS only.</p>
+  </aside>
+  <main>
+    <div id="status" role="status" aria-live="polite">Loading sample forecast…</div>
+    <div class="report-heading"><div><p class="eyebrow" id="model-name">MONTHLY OPERATING PLAN</p><h2 id="active-name">Base scenario</h2></div><div class="downloads"><button id="csv" class="secondary" disabled>Export CSV</button><button id="report" class="secondary" disabled>Export report</button></div></div>
+    <div id="kpis" class="kpis"></div>
+    <section class="panel"><div class="panel-heading"><div><h3>Cash across scenarios</h3><p>Month-end cash after working capital, capital spending, taxes, and debt payments.</p></div><span id="currency" class="tag">USD</span></div><div id="cash-chart"></div><div id="legend" class="legend"></div></section>
+    <section class="panel"><div class="panel-heading"><div><h3>Revenue &amp; operating income</h3><p>Operating income before depreciation, interest, and tax.</p></div></div><div id="profit-chart"></div><div class="legend"><span class="blue">Revenue</span><span class="green">Operating income</span></div></section>
+    <section class="panel"><div class="panel-heading"><div><h3>Monthly forecast</h3><p>Signed cash variance against baseline. Scroll for the full table.</p></div></div><div class="table-scroll"><table id="monthly"><caption class="sr-only">Monthly forecast for the selected scenario</caption><thead></thead><tbody></tbody></table></div></section>
+    <section class="notes"><h3>Read the model correctly</h3><p>Break-even estimates operating revenue needed to cover fixed costs and payroll. It excludes interest, taxes, capital spending, and cash timing.</p><p>Runway uses average cash burn over the last three available months, before new debt draws. It includes capital spending and principal payments. “No recent burn” does not guarantee future cash availability.</p><p>Taxes use your assumed rate on positive operating income less interest. Tax rules, loss carryforwards, depreciation, inventory, sales taxes, and distributions are outside this model.</p><p>This tool provides calculations, not financial, tax, legal, or investment advice.</p></section>
+  </main>
+</div>
+</body>
+</html>
