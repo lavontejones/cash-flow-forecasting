@@ -39,7 +39,8 @@ const { chromium } = require("playwright");
     await page.locator("#scenario").selectOption("custom");
     await page.locator("#input-monthly_revenue").fill("121000");
     await page.locator("button[type=submit]").click();
-    await page.waitForFunction(() => document.querySelector("#input-monthly_revenue").value === "121000" && !document.querySelector("#scenario").disabled);
+    await page.locator("#scenario:not([disabled])").waitFor();
+    assert.ok(!(await page.locator("#status").getAttribute("class")).includes("error"));
     assert.match(await page.locator("#active-name").innerText(), /Custom/);
     assert.equal(await page.locator("#input-monthly_revenue").inputValue(), "121000");
 
@@ -80,7 +81,7 @@ const { chromium } = require("playwright");
     await page.locator("#active-name").filter({hasText:"Base"}).waitFor();
     await page.locator("#input-monthly_revenue").fill("101000");
     await page.locator("button[type=submit]").click();
-    await page.waitForFunction(() => document.querySelector("#input-monthly_revenue").value === "101000" && !document.querySelector("#scenario").disabled);
+    await page.locator("#scenario:not([disabled])").waitFor();
     assert.ok(!(await page.locator("#status").getAttribute("class")).includes("error"));
     await page.locator("#reset").click();
     await page.locator("#status").filter({hasText:"Every monthly cash reconciliation passed"}).waitFor();
