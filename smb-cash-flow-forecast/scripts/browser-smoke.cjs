@@ -53,6 +53,8 @@ const { chromium } = require("playwright");
     assert.equal(doc.scenarios.custom.monthly_revenue,121000);
     assert.equal(doc.assumptions.monthly_revenue,120000);
 
+    // Open the collapsed timing panel before editing its collection assumption.
+    await page.getByText("Timing & seasonality", {exact:true}).click();
     await page.locator("#input-collection_weights").fill("0.2, 0.2");
     await page.locator("button[type=submit]").click();
     await page.locator("#status.error").waitFor();
